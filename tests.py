@@ -2,73 +2,56 @@
 
 Ce module contient des tests unitaires pour le projet Quoridor.
 """
-from quoridor import formater_damier, formater_jeu, formater_légende
+from copy import deepcopy
+
+from quoridor import Quoridor
 
 
-def test_formater_légende_pour_une_nouvelle_partie():
+def test_créer_état_pour_une_nouvelle_partie():
     """
-    tester la fonction formater_légende pour une nouvelle partie
+    function pour test_créer_état_pour_une_nouvelle_partie
     """
-    joueurs = [
-        {"nom": "Robin", "murs": 10, "pos": [5, 1]},
-        {"nom": "Alfred", "murs": 10, "pos": [5, 9]},
-    ]
-
-    attendu = (
-        "Légende:\n"
-        "   1=Robin,  murs=||||||||||\n"
-        "   2=Alfred, murs=||||||||||\n"
-    )
-
-    résultat = formater_légende(joueurs)
-
-    assert résultat == attendu, "Échec du test de formater_légende pour une nouvelle partie"
-
-
-def test_formater_damier_pour_une_nouvelle_partie():
-    """
-    tester la fonction formater_damier pour une nouvelle partie
-    """
-    joueurs = [
-        {"nom": "Robin", "murs": 10, "pos": [5, 1]},
-        {"nom": "Alfred", "murs": 10, "pos": [5, 9]},
-    ]
-    murs = {
-        "horizontaux": [],
-        "verticaux": [],
+    état = {
+        "joueurs": [
+            {"nom": "Robin", "murs": 10, "pos": [5, 1]},
+            {"nom": "Alfred", "murs": 10, "pos": [5, 9]},
+        ],
+        "murs": {
+            "horizontaux": [],
+            "verticaux": [],
+        },
     }
+    attendu = deepcopy(état)
 
-    attendu = (
-        "   -----------------------------------\n"
-        "9 | .   .   .   .   2   .   .   .   . |\n"
-        "  |                                   |\n"
-        "8 | .   .   .   .   .   .   .   .   . |\n"
-        "  |                                   |\n"
-        "7 | .   .   .   .   .   .   .   .   . |\n"
-        "  |                                   |\n"
-        "6 | .   .   .   .   .   .   .   .   . |\n"
-        "  |                                   |\n"
-        "5 | .   .   .   .   .   .   .   .   . |\n"
-        "  |                                   |\n"
-        "4 | .   .   .   .   .   .   .   .   . |\n"
-        "  |                                   |\n"
-        "3 | .   .   .   .   .   .   .   .   . |\n"
-        "  |                                   |\n"
-        "2 | .   .   .   .   .   .   .   .   . |\n"
-        "  |                                   |\n"
-        "1 | .   .   .   .   1   .   .   .   . |\n"
-        "--|-----------------------------------\n"
-        "  | 1   2   3   4   5   6   7   8   9\n"
-    )
+    résultat = Quoridor(attendu["joueurs"]).état_courant()
 
-    résultat = formater_damier(joueurs, murs)
-
-    assert résultat == attendu, "Échec du test de formater_damier pour une nouvelle partie"
+    assert attendu == résultat, "Échec du test de création d'état pour une nouvelle partie"
 
 
-def test_formater_jeu_pour_une_nouvelle_partie():
+def test_créer_état_pour_une_partie_avancée():
     """
-    tester la fonction formater_jeu pour une nouvelle partie
+    test_créer_état_pour_une_partie_avancée
+    """
+    état = {
+        "joueurs": [
+            {"nom": "Alfred", "murs": 7, "pos": [5, 5]},
+            {"nom": "Robin", "murs": 3, "pos": [8, 6]},
+        ],
+        "murs": {
+            "horizontaux": [[4, 4], [2, 6], [3, 8], [5, 8], [7, 8]],
+            "verticaux": [[6, 2], [4, 4], [2, 6], [7, 5], [7, 7]],
+        },
+    }
+    attendu = deepcopy(état)
+
+    résultat = Quoridor(attendu["joueurs"], attendu["murs"]).état_courant()
+
+    assert attendu == résultat, "Échec du test de création d'état pour une partie avancée"
+
+
+def test_afficher_une_nouvelle_partie():
+    """
+    test_afficher_une_nouvelle_partie
     """
     état = {
         "joueurs": [
@@ -81,6 +64,8 @@ def test_formater_jeu_pour_une_nouvelle_partie():
         },
     }
 
+    résultat = str(Quoridor(état["joueurs"], état["murs"]))
+
     attendu = (
         "Légende:\n"
         "   1=Robin,  murs=||||||||||\n"
@@ -106,15 +91,12 @@ def test_formater_jeu_pour_une_nouvelle_partie():
         "--|-----------------------------------\n"
         "  | 1   2   3   4   5   6   7   8   9\n"
     )
-
-    résultat = formater_jeu(état)
-
-    assert résultat == attendu, "Échec du test de formater_jeu pour une nouvelle partie"
+    assert attendu == résultat, "Échec du test d'affichage d'une nouvelle partie"
 
 
-def test_formater_jeu_pour_une_partie_avancée():
+def test_afficher_une_partie_avancée():
     """
-    tester la fonction formater_jeu pour une nouvelle partie
+    test_afficher_une_partie_avancée
     """
     état = {
         "joueurs": [
@@ -124,8 +106,10 @@ def test_formater_jeu_pour_une_partie_avancée():
         "murs": {
             "horizontaux": [[4, 4], [2, 6], [3, 8], [5, 8], [7, 8]],
             "verticaux": [[6, 2], [4, 4], [2, 6], [7, 5], [7, 7]],
-        }
+        },
     }
+
+    résultat = str(Quoridor(état["joueurs"], état["murs"]))
 
     attendu = (
         "Légende:\n"
@@ -152,19 +136,16 @@ def test_formater_jeu_pour_une_partie_avancée():
         "--|-----------------------------------\n"
         "  | 1   2   3   4   5   6   7   8   9\n"
     )
-
-    résultat = formater_jeu(état)
-
-    assert résultat == attendu, "Échec du test de formater_jeu pour une partie avancée"
-
+    assert attendu == résultat, "Échec du test d'affichage d'une partie avancée"
 
 
 if __name__ == "__main__":
-    test_formater_légende_pour_une_nouvelle_partie()
-    print("Test de formater_légende pour une nouvelle partie réussi")
-    test_formater_damier_pour_une_nouvelle_partie()
-    print("Test de formater_damier pour une nouvelle partie réussi")
-    test_formater_jeu_pour_une_nouvelle_partie()
-    print("Test de formater_jeu pour une nouvelle partie réussi")
-    test_formater_jeu_pour_une_partie_avancée()
-    print("Test de formater_jeu pour une partie avancée réussi")
+    print("Tests :")
+    test_créer_état_pour_une_nouvelle_partie()
+    print("✅ test_créer_état_pour_une_nouvelle_partie")
+    test_créer_état_pour_une_partie_avancée()
+    print("✅ test_créer_état_pour_une_partie_avancée")
+    test_afficher_une_nouvelle_partie()
+    print("✅ test_afficher_une_nouvelle_partie")
+    test_afficher_une_partie_avancée()
+    print("✅ test_afficher_une_partie_avancée")

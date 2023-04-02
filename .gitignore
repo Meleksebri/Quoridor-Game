@@ -1,9 +1,16 @@
-# Exclure absolument tout les fichiers/dossiers
-projet.bundle
-# Parmis les fichiers/dossiers exclus, autoriser les suivants:
+# Ignorer l'entièreté des fichiers/dossiers
+/**/*
+
+# Ne pas ignorer les fichiers suivant
 !/.gitignore
-!/README.md
-!/quoridor.py
-!/main.py
 !/api.py
+!/graphe.py
+!/main.py
+!/quoridor.py
+!/quoridor_error.py
+!/README.md
 !/tests.py
+!/utilitaire.py
+!/quoridorx.py
+
+# Pas besoin d'inclure les bundles créés, ils devraient être ignorés automatiquement

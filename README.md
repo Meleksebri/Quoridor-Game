@@ -4,15 +4,15 @@
 
 ## Objectifs
 
-Pour ce projet, vous allez réaliser un premier programme qui interagit avec la **ligne de commande** et qui accède à **Internet**. Vous allez aussi vous familiariser avec la logistique des projets, c'est-à-dire installer sur votre ordinateur un environnement de développement [VS Code](https://code.visualstudio.com/) et vous initier à un logiciel de gestion des révisions [Git](https://git-scm.com/).
+Pour ce deuxième projet, vous aurez à créer une classe pour encapsuler le jeu Quoridor. Vous aurez à réutiliser certains segments de code de votre module `quoridor.py`.
 
 ## Prérequis
 
 - [Git](https://git-scm.com/downloads/)
-- [Python pour macOS](https://www.python.org/downloads/), [Python pour Windows](https://apps.microsoft.com/store/detail/python-39/9P7QFQMJRFP7)
+- [Python pour macOS](https://www.python.org/downloads/), [Python pour Windows](https://apps.microsoft.com/store/detail/python-310/9PJPW5LDXLZ5)
 - [VS Code](https://code.visualstudio.com/download/)
 
-Avant de télécharger Python ou Git, vous pouvez vérifier s'il est déjà installé sur votre ordinateur depuis un terminal. Notez que pour Python les version 3.7, 3.8, 3.9, 3.10 seront tous compatible. Donc si vous avez déjà une de ces versions, inutile d'en installer une autre.
+Avant de télécharger Python ou Git, vous pouvez vérifier s'il est déjà installé sur votre ordinateur depuis un terminal. Notez que pour Python les version 3.9, 3.10, 3.11 seront tous compatible. Donc si vous avez déjà une de ces versions, inutile d'en installer une autre.
 
 ### Windows
 
@@ -93,7 +93,7 @@ Ouvrir un bundle:
 git clone quoridor.bundle
 ```
 
-**N'oubliez pas de supprimer les fichiers créé lors de l'ouverture du bundle pour ne pas vous embourber de fichiers inutiles.**
+**N'oubliez pas de supprimer les fichiers créés lors de l'ouverture du bundle pour ne pas vous embourber de fichiers inutiles.**
 
 ## Liens utile
 
