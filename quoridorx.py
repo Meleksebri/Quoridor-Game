@@ -206,3 +206,62 @@ class QuoridorX(Quoridor):
             position2.append(int(position1[0]))
             position2.append(int(position1[2]))
         return (move, position2)
+   
+   
+   
+""" def afficher(self):
+    """
+    méthode pour afficher le jeu
+    """
+    # Choose a new color scheme
+    wall_color = "brown"
+    pawn_color = "white"
+    legend_color = "black"
+    background_color = "light blue"
+
+    # Change the size and position of the game board
+    width = 1000
+    height = 1000
+    board_w = int(width * 0.8)
+    board_h = int(height * 0.8)
+    origin_x = -board_w/2
+    origin_y = -board_h/2
+    origin = (origin_x, origin_y)
+
+    # Initialize the game board
+    screen = turtle.Screen()
+    screen.setup(width, height)
+    screen.title("Quoridor Game")
+    screen.bgcolor(background_color)
+    sebri = turtle.Turtle(visible=False)
+    sebri.speed(0)
+
+    # Draw the walls
+    sebri.penup()
+    sebri.goto(origin_x, origin_y)
+    sebri.pensize(5)
+    sebri.pencolor(wall_color)
+    sebri.pendown()
+    sebri.forward(board_w)
+    sebri.left(90)
+    sebri.forward(board_h)
+    sebri.left(90)
+    sebri.forward(board_w)
+    sebri.left(90)
+    sebri.forward(board_h)
+
+    # Draw the pawns
+    pawns = self.état["joueurs"]
+    for i in range(2):
+        sebri.penup()
+        sebri.goto(origin_x + pawns[i]['pos'][0] * board_w // 10, origin_y + pawns[i]['pos'][1] * board_h // 10)
+        sebri.shape("turtle")
+        sebri.shapesize(2)
+        sebri.color(pawn_color)
+        sebri.stamp()
+
+    # Draw the legend
+    sebri.penup()
+    sebri.goto(origin_x + board_w // 2, origin_y + board_h // 2)
+    sebri.color(legend_color)
+    sebri.write("Legend:\n\nPlayer 1 - P\nPlayer 2 - """
